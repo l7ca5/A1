@@ -1,4 +1,5 @@
 from random import*
+from time import*
 t=[2,3,1]
 
 
@@ -57,3 +58,40 @@ def test_tri_selection():
         assert t2==c2
         assert t3==c3
     print("tout va bien")
+
+def test_tri_insertion():
+    for n in range(100):
+        t1=ttc(n,0)
+        t2=ttc(n,n//5)
+        t3=ttc(n,5*n**2)
+        c1, c2, c3 = copie(t1), copie(t2), copie(t3)
+        shuffle(t1)
+        shuffle(t2)
+        shuffle(t3)
+        tri_insertion(t1)
+        tri_insertion(t2)
+        tri_insertion(t3)
+        assert t1==c1
+        assert t2==c2
+        assert t3==c3
+    print("tout va bien")
+
+def temps_tri_insertion(n):
+    ttc(n,n*10)
+    c = copie(t)
+    shuffle(t)
+    debut = perf_counter()
+    tri_insertion(t)
+    fin = perf_counter()
+    assert t==c
+    return fin-debut
+    
+def temps_tri_selection(n):
+    ttc(n,n*10)
+    c = copie(t)
+    shuffle(t)
+    debut = perf_counter()
+    tri_selection(t)
+    fin = perf_counter()
+    assert t==c
+    return fin-debut
